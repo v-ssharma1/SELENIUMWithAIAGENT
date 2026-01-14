@@ -1,30 +1,31 @@
 package com.qa.automation.base;
 
 import com.qa.automation.utils.ConfigReader;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 public class BaseTest {
 
     protected WebDriver driver;
+    protected WebDriverWait wait;
 
-    @BeforeMethod
-    public void setup() {
+    public void initializeDriver() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
 
         // Set implicit wait from config
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(ConfigReader.getImplicitWait()));
+
+        // Initialize explicit wait from config
+        wait = new WebDriverWait(driver, Duration.ofSeconds(ConfigReader.getExplicitWait()));
     }
 
-    @AfterMethod
-    public void tearDown() {
+    public void quitDriver() {
         if (driver != null) {
             driver.quit();
         }
