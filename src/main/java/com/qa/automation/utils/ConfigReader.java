@@ -47,10 +47,20 @@ public class ConfigReader {
         return Integer.parseInt(properties.getProperty("explicitWait", "20"));
     }
 
+    public static String getBrowser() {
+        // Check system property first (for Jenkins override)
+        String browser = System.getProperty("browser");
+        if (browser != null && !browser.isEmpty()) {
+            return browser;
+        }
+        return properties.getProperty("browser", "chrome");
+    }
+
     // For testing
     public static void main(String[] args) {
         System.out.println("Environment: " + getEnvironment());
         System.out.println("URL: " + getUrl());
+        System.out.println("Browser: " + getBrowser());
         System.out.println("Implicit Wait: " + getImplicitWait());
         System.out.println("Explicit Wait: " + getExplicitWait());
     }

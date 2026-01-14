@@ -22,6 +22,34 @@
         <version>4.17.0</version>
     </dependency>
 
+    <!-- Selenium Chrome Driver -->
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-chrome-driver</artifactId>
+        <version>4.17.0</version>
+    </dependency>
+
+    <!-- Selenium Firefox Driver -->
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-firefox-driver</artifactId>
+        <version>4.17.0</version>
+    </dependency>
+
+    <!-- Selenium Edge Driver -->
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-edge-driver</artifactId>
+        <version>4.17.0</version>
+    </dependency>
+
+    <!-- Selenium Safari Driver -->
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-safari-driver</artifactId>
+        <version>4.17.0</version>
+    </dependency>
+
     <!-- WebDriverManager -->
     <dependency>
         <groupId>io.github.bonigarcia</groupId>

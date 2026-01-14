@@ -1,9 +1,9 @@
 package com.qa.automation.base;
 
+import com.qa.automation.factory.BrowserFactory;
+import com.qa.automation.factory.BrowserType;
 import com.qa.automation.utils.ConfigReader;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -14,8 +14,12 @@ public class BaseTest {
     protected WebDriverWait wait;
 
     public void initializeDriver() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        // Get browser type from config (with Jenkins override support)
+        String browserName = ConfigReader.getBrowser();
+        BrowserType browserType = BrowserType.fromString(browserName);
+        
+        // Create driver using factory
+        driver = BrowserFactory.createDriver(browserType);
         driver.manage().window().maximize();
 
         // Set implicit wait from config
