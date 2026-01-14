@@ -15,9 +15,9 @@ import org.testng.annotations.Listeners;
     glue = "com.qa.automation.stepdefinitions",
     plugin = {
         "pretty",
-        "html:target/cucumber-reports.html",
-        "json:target/cucumber.json",
-        "junit:target/cucumber.xml"
+        "html:test-output/CucumberReport/cucumber-report.html",
+        "json:test-output/CucumberReport/cucumber.json",
+        "junit:test-output/CucumberReport/cucumber.xml"
     },
     monochrome = false,
     publish = false

@@ -3,6 +3,7 @@ package com.qa.automation.tests;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import com.qa.automation.utils.CucumberReportUtil;
 import com.qa.automation.utils.LoggerUtil;
 import com.qa.automation.utils.ReportUtil;
 import org.apache.logging.log4j.Logger;
