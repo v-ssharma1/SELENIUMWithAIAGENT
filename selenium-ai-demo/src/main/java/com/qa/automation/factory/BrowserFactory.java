@@ -41,7 +41,8 @@ public class BrowserFactory {
      */
     private static String getGridHost() {
         String host = System.getenv("HUB_HOST");
-        return (host != null && !host.isEmpty()) ? host : "localhost";
+        // Use 'host.docker.internal' for Docker on Mac/Windows, fallback to localhost
+        return (host != null && !host.isEmpty()) ? host : "host.docker.internal";
     }
 
     private static String getGridUrl() {
