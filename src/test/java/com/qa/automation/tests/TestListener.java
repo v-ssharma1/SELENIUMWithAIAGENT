@@ -6,6 +6,8 @@ import com.aventstack.extentreports.Status;
 import com.qa.automation.utils.CucumberReportUtil;
 import com.qa.automation.utils.LoggerUtil;
 import com.qa.automation.utils.ReportUtil;
+import com.qa.automation.utils.ScreenshotUtil;
+import org.openqa.selenium.WebDriver;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -117,6 +119,22 @@ public class TestListener implements ITestListener {
                     test.log(Status.FAIL, "Failed At: " + stackTrace[0].getClassName() + 
                             " >> " + stackTrace[0].getMethodName() + 
                             " (Line: " + stackTrace[0].getLineNumber() + ")");
+                }
+                // Capture and attach screenshot if possible
+                Object testInstance = result.getInstance();
+                WebDriver driver = null;
+                try {
+                    java.lang.reflect.Field driverField = testInstance.getClass().getSuperclass().getDeclaredField("driver");
+                    driverField.setAccessible(true);
+                    driver = (WebDriver) driverField.get(testInstance);
+                } catch (Exception ex) {
+                    logger.warn("Could not access WebDriver for screenshot: " + ex.getMessage());
+                }
+                if (driver != null) {
+                    String base64 = ScreenshotUtil.captureScreenshotBase64(driver);
+                    if (base64 != null) {
+                        test.addScreenCaptureFromBase64String(base64, "Failure Screenshot");
+                    }
                 }
             }
             
